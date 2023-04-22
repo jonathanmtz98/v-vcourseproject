@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Login</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+
+    <!-- Login CSS-->
+    <link rel="stylesheet" href="Login.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+
+</head>
+<section class="vh-100" style="background-color: #00d0ff;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5"  >
+                <div class="card shadow-2-strong" style="border-radius: 1rem;" >
+                    <div class="card-body p-5 text-center" >
+
+                        <img src="../travel-business.jpg" width="350" height="350">
+
+                        <h2 class="mb-5" style="color: rgb(0, 0, 0);">Login to start your new adventure </h2>
+                        <form action = "/login" method="POST">
+                        <div class="form-outline mb-4">
+                            <input type="username" name="username" id="typeEmailX-2" class="form-control form-control-md"/>
+                            <label class="form-label" for="typeEmailX-2" style="color: rgb(0, 0, 0);">Username</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="password" name="password" id="typePasswordX-2" class="form-control form-control-md" />
+                            <label class="form-label" for="typePasswordX-2" style="color: rgb(0,0,0);">Password</label>
+                        </div>
+
+
+
+                        <button class="btn btn-primary btn-sm btn-block" style="background-color: rgb(0, 221, 255); color: #000000 ;" type="submit">Login</button>
+                        
+                        <a href="/signup" class="btn btn-sm btn-block btn-primary mb-2" style="background-color: rgb(0, 221, 255); color: #000000;" type=""></i>Sign Up</a>
+                    </form>
+                        
+                        <%- include ('partials/footer') %>
+
+               
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
