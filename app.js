@@ -30,8 +30,7 @@ mongoose.connect('mongodb://localhost/V&V')
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
-    secret: String,
-    key: String
+    role: String
 })
 
 userSchema.plugin(passportLocalMongoose);
@@ -76,7 +75,7 @@ app.get("/signup", function(req, res){
 })
 
 app.post("/signup", function(req,res){
-    User.register({username: req.body.username}, req.body.password, function(err,user){
+    User.register({username: req.body.username, role: 'user'}, req.body.password,function(err,user){
         if(err){
             console.log(err);
             res.redirect("/signup")
@@ -104,18 +103,25 @@ const travelSchema = new mongoose.Schema({
 const Travel = mongoose.model("Travel", travelSchema)
 
 //Main Page
-app.get("/", function(req,res){
+app.get("/", async (req, res) => {
     if(req.isAuthenticated()){
-        res.render("home")
-    }
+        try{
+            const destinations = await Destination.find({})
+            res.render('clientPage.ejs', {destinations})
+    
+        } catch (err){
+            console.log(err);
+            res.send("Error retrieving available destinations")
+        }}
     else{
         res.redirect("/login")//Force the user to login in order to access the main page
     }
-    //res.render("home")
-})
+    
 
-app.post("/", function(req,res){
-    const destination_input = req.body.destination;
+});
+
+app.post("/", async (req,res) =>{
+    const destination_input = req.body.destinations;
     const origin_input = req.body.origin;
     const departure_input = req.body.departure;
     const return_input = req.body.returnDate;
@@ -139,13 +145,52 @@ app.post("/", function(req,res){
 
     console.log(flight);
     res.send(`Thanks for booking! Your trip has been confirmed.`);
+
+})
+
+
+
+const destinationSchema = new mongoose.Schema({
+    destination: String
+})
+
+const Destination = mongoose.model("Destination", destinationSchema)
+
+//Manage Flights
+app.get("/adminhome", function(req,res){
+    res.render('adminhome')
+});
+
+app.post("/adminhome", function(req,res){
+    const destination_input = req.body.destination;
+    const flight = new Destination ({
+        destination: destination_input,
+    })
+    flight.save()
+    console.log(flight);
+    //res.send(`Changes has been applied`);
+    res.render("success")
 });
 
 
 
+
+// app.get('/', async (req, res) => {
+//     try {
+//       // Find all documents in the collection
+//       const myDocuments = await MyModel.find({});
+//       // Render the EJS file and pass the documents as a variable
+//       res.render('index.ejs', { myDocuments });
+//     } catch (err) {
+//       console.log(err);
+//       res.send('Error retrieving documents');
+//     }
+//   });
+
+
 let port = process.env.PORT;
 if (port == null || port == "") {
-    port = 3000;
+    port = 3001;
 }
 app.listen(port,function(){
     console.log("Server has started successfully");
