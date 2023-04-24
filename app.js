@@ -172,7 +172,19 @@ app.get('/viewflights', async (req, res) => {
       }
   });
   
-
+  app.get('/delete/:id', async (req, res) => {
+    const elementId = req.params.id;
+    try {
+      const deletedElement = await Travel.findByIdAndDelete(elementId);
+      console.log(`Element with ID ${elementId} deleted`);
+      //res.send(`Element with ID ${elementId} deleted`);
+      res.redirect("/viewflights")
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Error deleting element');
+    }
+  });
+  
 
 // ################# ADMIN SECTION ##################
 const destinationSchema = new mongoose.Schema({
