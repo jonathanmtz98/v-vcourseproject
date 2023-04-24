@@ -203,8 +203,17 @@ app.post("/adminlogin",function(req, res){
 })
 
 
-app.get("/manageflights", function(req,res){
-    res.render('manageflights')
+app.get("/manageflights", async (req,res)=> {
+    //res.render('manageflights')
+        try {
+      // Find all documents in the collection
+      const destinations = await Destination.find({});
+      // Render the EJS file and pass the documents as a variable
+      res.render('manageflights.ejs', { destinations });
+    } catch (err) {
+      console.log(err);
+      res.send('Error retrieving documents');
+    }
 });
 
 

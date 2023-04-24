@@ -1,7 +1,11 @@
 <h1>Manage Flights</h1>
 
-
-
+<h2> Destinations you've included in the system:</h2>
+<ul>
+    <% destinations.forEach(destination => { %>
+      <li><%= destination.destination %> </li>
+    <% }) %>
+</ul> 
 <a href="/adminhome" class="button">Add a New Flight</a>
 <br><br>
 <a href="/deleteflight" class="button">Delete a Flight</a>
