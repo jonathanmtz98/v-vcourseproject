@@ -32,6 +32,13 @@ const userSchema = new mongoose.Schema({
     password: String,
 })
 
+const adminSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+})
+
+const Admin = mongoose.model("Admin", adminSchema)
+
 userSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model("User", userSchema)
@@ -40,6 +47,7 @@ passport.use(User.createStrategy())
 
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
+
 
 
 app.use(passport.initialize());
@@ -171,13 +179,6 @@ app.post("/adminhome", function(req,res){
     res.render("success")
 });
 
-const adminSchema = new mongoose.Schema({
-    username: String,
-    password: String,
-})
-
-const Admin = mongoose.model("Admin", adminSchema)
-
 
 
 app.get("/adminlogin", function(req, res){
@@ -201,24 +202,6 @@ app.post("/adminlogin",function(req, res){
     })
 })
 
-app.get("/adminsignup", function(req, res){
-    res.render("adminsignup")
-})
-
-app.post("/adminsignup", function(req,res){
-    User.register({username: req.body.username, role: 'user'}, req.body.password,function(err,user){
-        if(err){
-            console.log(err);
-            res.redirect("/signup")
-        } else{
-            passport.authenticate("local")(req,res, function(){
-                res.redirect("/manageflights")
-            })
-        }
-    })
-})
-
-
 
 app.get("/manageflights", function(req,res){
     res.render('manageflights')
@@ -227,7 +210,6 @@ app.get("/manageflights", function(req,res){
 
 
 app.get("/deleteflight", function(req,res){
-
     res.render('deleteflight')
 })
 
