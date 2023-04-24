@@ -70,7 +70,7 @@ app.post("/login",function(req, res){
             console.log(err);
         } else{
             passport.authenticate("local")(req,res,function(){
-                res.redirect("/");
+                res.redirect("/manageclientflights");
             })
         }
     })
@@ -88,7 +88,7 @@ app.post("/signup", function(req,res){
             res.redirect("/signup")
         } else{
             passport.authenticate("local")(req,res, function(){
-                res.redirect("/")
+                res.redirect("/manageclientflights")
             })
         }
     })
@@ -155,8 +155,12 @@ app.post("/", async (req,res) =>{
 
 })
 
+app.get("/manageclientflights", function(req,res){
+    res.render('manageclientflights')
+})
 
 
+// ################# ADMIN SECTION ##################
 const destinationSchema = new mongoose.Schema({
     destination: String
 })
