@@ -30,7 +30,6 @@ mongoose.connect('mongodb://localhost/V&V')
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
-    role: String
 })
 
 userSchema.plugin(passportLocalMongoose);
@@ -171,6 +170,66 @@ app.post("/adminhome", function(req,res){
     //res.send(`Changes has been applied`);
     res.render("success")
 });
+
+const adminSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+})
+
+const Admin = mongoose.model("Admin", adminSchema)
+
+
+
+app.get("/adminlogin", function(req, res){
+    res.render("adminlogin")
+})
+
+app.post("/adminlogin",function(req, res){
+    const admin = new Admin({
+        username: req.body.username,
+        password:req.body.password
+    })
+
+    req.login(admin, function(err){
+        if (err){
+            console.log(err);
+        } else{
+            passport.authenticate("local")(req,res,function(){
+                res.redirect("/manageflights");
+            })
+        }
+    })
+})
+
+app.get("/adminsignup", function(req, res){
+    res.render("adminsignup")
+})
+
+app.post("/adminsignup", function(req,res){
+    User.register({username: req.body.username, role: 'user'}, req.body.password,function(err,user){
+        if(err){
+            console.log(err);
+            res.redirect("/signup")
+        } else{
+            passport.authenticate("local")(req,res, function(){
+                res.redirect("/manageflights")
+            })
+        }
+    })
+})
+
+
+
+app.get("/manageflights", function(req,res){
+    res.render('manageflights')
+});
+
+
+
+app.get("/deleteflight", function(req,res){
+
+    res.render('deleteflight')
+})
 
 
 
