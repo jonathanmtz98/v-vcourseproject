@@ -151,13 +151,27 @@ app.post("/", async (req,res) =>{
     flight.save()
 
     console.log(flight);
-    res.send(`Thanks for booking! Your trip has been confirmed.`);
+    res.render(`clientbookingsuccess`);
 
 })
 
 app.get("/manageclientflights", function(req,res){
     res.render('manageclientflights')
 })
+
+app.get('/viewflights', async (req, res) => {
+    //res.render('manageflights')
+    try {
+        // Find all documents in the collection
+        const flights = await Travel.find({});
+        // Render the EJS file and pass the documents as a variable
+        res.render('viewflights.ejs', { flights });
+      } catch (err) {
+        console.log(err);
+        res.send('Error retrieving documents');
+      }
+  });
+  
 
 
 // ################# ADMIN SECTION ##################

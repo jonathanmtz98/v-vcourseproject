@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Travel Bookings</title>
+  </head>
+  <body>
+    <h1>Travel Bookings</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Origin</th>
+          <th>Destination</th>
+          <th>Start Date</th>
+          <th>Return Date</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <% flights.forEach((flight) => { %>
+          <tr>
+            <td><%= flight.passengername %></td>
+            <td><%= flight.phone %></td>
+            <td><%= flight.email %></td>
+            <td><%= flight.origin %></td>
+            <td><%= flight.destination %></td>
+            <td><%= flight.departure %></td>
+            <td><%= flight.return %></td>
+
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>
