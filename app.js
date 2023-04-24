@@ -127,6 +127,8 @@ app.get("/", async (req, res) => {
 
 });
 
+
+//This function is in charge of booking a new flight
 app.post("/", async (req,res) =>{
     const destination_input = req.body.destinations;
     const origin_input = req.body.origin;
@@ -159,6 +161,7 @@ app.get("/manageclientflights", function(req,res){
     res.render('manageclientflights')
 })
 
+//This function is in charge of getting all flights and displaying them 
 app.get('/viewflights', async (req, res) => {
     //res.render('manageflights')
     try {
@@ -172,7 +175,8 @@ app.get('/viewflights', async (req, res) => {
       }
   });
   
-  app.get('/delete/:id', async (req, res) => {
+//This function is in charge of canceling (deleting) a booked flight  
+app.get('/delete/:id', async (req, res) => {
     const elementId = req.params.id;
     try {
       const deletedElement = await Travel.findByIdAndDelete(elementId);
@@ -183,7 +187,7 @@ app.get('/viewflights', async (req, res) => {
       console.log(err);
       res.status(500).send('Error deleting element');
     }
-  });
+});
   
 
 // ################# ADMIN SECTION ##################
@@ -198,6 +202,7 @@ app.get("/adminhome", function(req,res){
     res.render('adminhome')
 });
 
+//This function is for the admin to add a new destination into the system
 app.post("/adminhome", function(req,res){
     const destination_input = req.body.destination;
     const flight = new Destination ({
@@ -215,6 +220,7 @@ app.get("/adminlogin", function(req, res){
     res.render("adminlogin")
 })
 
+//This function is in charge of logging in as an admin
 app.post("/adminlogin",function(req, res){
     const admin = new Admin({
         username: req.body.username,
@@ -247,10 +253,6 @@ app.get("/manageflights", async (req,res)=> {
 });
 
 
-
-app.get("/deleteflight", function(req,res){
-    res.render('deleteflight')
-})
 
 
 
