@@ -64,7 +64,6 @@ app.post("/login",function(req, res){
         username: req.body.username,
         password:req.body.password
     })
-
     req.login(user, function(err){
         if (err){
             console.log(err);
@@ -109,7 +108,7 @@ const travelSchema = new mongoose.Schema({
 
 const Travel = mongoose.model("Travel", travelSchema)
 
-//Main Page
+//Booking flights page retriever
 app.get("/", async (req, res) => {
     if(req.isAuthenticated()){
         try{
@@ -123,12 +122,10 @@ app.get("/", async (req, res) => {
     else{
         res.redirect("/login")//Force the user to login in order to access the main page
     }
-    
-
 });
 
 
-//This function is in charge of booking a new flight
+//This function is in charge of booking a new flight (form)
 app.post("/", async (req,res) =>{
     const destination_input = req.body.destinations;
     const origin_input = req.body.origin;
@@ -138,7 +135,6 @@ app.post("/", async (req,res) =>{
     const email_input = req.body.email;
     const phone_input = req.body.phone;
     const seat_input = req.body.seatSelection;
-
 
     const flight = new Travel ({
         destination: destination_input,
@@ -151,12 +147,11 @@ app.post("/", async (req,res) =>{
         seat: seat_input
     })
     flight.save()
-
     console.log(flight);
     res.render(`clientbookingsuccess`);
-
 })
 
+//This function retrieves main GUI for clients, where they can decide to book a flight or view flights
 app.get("/manageclientflights", function(req,res){
     res.render('manageclientflights')
 })
@@ -215,7 +210,7 @@ app.post("/adminhome", function(req,res){
 });
 
 
-
+//Retrieve admin login page
 app.get("/adminlogin", function(req, res){
     res.render("adminlogin")
 })
@@ -239,6 +234,7 @@ app.post("/adminlogin",function(req, res){
 })
 
 
+//This function is to show flights in the admin gui so he decides to add or delete more
 app.get("/manageflights", async (req,res)=> {
     //res.render('manageflights')
         try {
