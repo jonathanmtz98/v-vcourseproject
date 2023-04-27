@@ -24,9 +24,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const mongoose = require ("mongoose")
-//mongoose.connect("mongodb://localhost:27017/test")
-mongoose.connect('mongodb://localhost/V&V')
-
+//mongoose.connect('mongodb://localhost/V&V')
+mongoose.connect('mongodb+srv://software:PassWord1!@cluster0.yjqdrnw.mongodb.net/?retryWrites=true&w=majority')
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
