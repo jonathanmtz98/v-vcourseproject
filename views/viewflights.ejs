@@ -16,7 +16,10 @@
           <th>Destination</th>
           <th>Seat #</th>
           <th>Start Date</th>
+          <th>Departure Time</th>
           <th>Return Date</th>
+          <th>Return Time</th>
+
 
         </tr>
       </thead>
@@ -30,7 +33,9 @@
             <td><%= flight.destination %></td>
             <td><%= flight.seat %></td>
             <td><%= flight.departure %></td>
+            <td><%= flight.departureTime %></td>
             <td><%= flight.return %></td>
+            <td><%= flight.returnTime %></td>
             <td>
                 <a href="/delete/<%= flight._id %>" class="btn btn-danger">Cancel this flight</a>
              </td>

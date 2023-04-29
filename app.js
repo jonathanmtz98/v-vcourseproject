@@ -97,7 +97,9 @@ const travelSchema = new mongoose.Schema({
     origin: String,
     destination: String,
     departure: Date,
+    departureTime: String,
     return: Date,
+    returnTime: String,
     passengername: String,
     phone: String,
     email: String,
@@ -129,7 +131,9 @@ app.post("/", async (req,res) =>{
     const destination_input = req.body.destinations;
     const origin_input = req.body.origin;
     const departure_input = req.body.departure;
+    const departure_time = req.body.departureTime;
     const return_input = req.body.returnDate;
+    const return_time = req.body.returnTime;
     const name_input = req.body.name;
     const email_input = req.body.email;
     const phone_input = req.body.phone;
@@ -139,7 +143,9 @@ app.post("/", async (req,res) =>{
         destination: destination_input,
         origin: origin_input,
         departure: departure_input,
+        departureTime: departure_time,
         return: return_input,
+        returnTime: return_time,
         passengername: name_input,
         email: email_input,
         phone: phone_input,
