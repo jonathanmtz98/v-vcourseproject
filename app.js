@@ -179,7 +179,7 @@ app.post('/update/:id', async (req,res)=>{
      console.log(id);
     // console.log(selectedSeat);
     try{
-        Travel.findByIdAndUpdate(id,{
+        await Travel.findByIdAndUpdate(id,{
             seatInput: selectedSeat
         }, {new: true})
         res.redirect("/viewflights")
