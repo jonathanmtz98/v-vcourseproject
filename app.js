@@ -5,10 +5,12 @@ const session = require('express-session')
 const passport = require('passport')
 const passportLocalMongoose = require('passport-local-mongoose')
 const crypto = require('crypto')
+const methodOverride = require ('method-override')
 
 const app = express()
 
 app.use(express.static("public"))
+app.use(methodOverride('_method'))
 app.set('view engine','ejs')
 app.use(bodyParser.urlencoded({
     extended: true
@@ -24,8 +26,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const mongoose = require ("mongoose")
-//mongoose.connect('mongodb://localhost/V&V')
-mongoose.connect('mongodb+srv://software:PassWord1!@cluster0.yjqdrnw.mongodb.net/?retryWrites=true&w=majority')
+const { application } = require("express")
+mongoose.connect('mongodb://localhost/V&V')
+//mongoose.connect('mongodb+srv://software:PassWord1!@cluster0.yjqdrnw.mongodb.net/?retryWrites=true&w=majority')
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
@@ -102,18 +105,21 @@ const travelSchema = new mongoose.Schema({
     returnTime: String,
     passengername: String,
     phone: String,
+    seatInput: String,
     email: String,
-    seat: String,
 })
 
 
 const Travel = mongoose.model("Travel", travelSchema)
+
+
 
 //Booking flights page retriever
 app.get("/", async (req, res) => {
     if(req.isAuthenticated()){
         try{
             const destinations = await Destination.find({})
+            //const seats = await Seat.find({})
             res.render('clientPage.ejs', {destinations})
     
         } catch (err){
@@ -137,7 +143,7 @@ app.post("/", async (req,res) =>{
     const name_input = req.body.name;
     const email_input = req.body.email;
     const phone_input = req.body.phone;
-    const seat_input = req.body.seatSelection;
+    seat_input = "placeholder"
 
     const flight = new Travel ({
         destination: destination_input,
@@ -149,12 +155,41 @@ app.post("/", async (req,res) =>{
         passengername: name_input,
         email: email_input,
         phone: phone_input,
-        seat: seat_input
+        seatInput: seat_input
+
     })
     flight.save()
     console.log(flight);
     res.render(`clientbookingsuccess`);
+    //res.render('select-seats', {flight})
+    //res.redirect(`/flights/${flight._id}`);
+
 })
+
+
+app.get('/edit/:id', async (req, res) => {
+    const flights = await Travel.findById(req.params.id);
+    res.render('select-seats', { flights: flights });
+});
+
+app.post('/update/:id', async (req,res)=>{
+     let id = req.params.id
+     selectedSeat = req.body.seat
+     console.log(selectedSeat);
+     console.log(id);
+    // console.log(selectedSeat);
+    try{
+        Travel.findByIdAndUpdate(id,{
+            seatInput: selectedSeat
+        }, {new: true})
+        res.redirect("/viewflights")
+    } catch(error){
+        console.log(error.message);
+        res.status(500).send({message: "Internal server error"})
+    }
+})
+
+
 
 //This function retrieves main GUI for clients, where they can decide to book a flight or view flights
 app.get("/manageclientflights", function(req,res){
@@ -210,6 +245,7 @@ app.post("/adminhome", function(req,res){
     })
     flight.save()
     console.log(flight);
+    console.log(seat);
     //res.send(`Changes has been applied`);
     res.render("success")
 });
