@@ -240,7 +240,14 @@ app.get('/delete/:id', async (req, res) => {
       res.status(500).send('Error deleting element');
     }
 });
-  
+
+
+// Payment page retriever
+app.get('/makepayment', async (req,res)=>{
+
+})
+
+
 
 // ############################################## ADMIN SECTION ##############################################
 const destinationSchema = new mongoose.Schema({
