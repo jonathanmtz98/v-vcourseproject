@@ -1,26 +1,72 @@
 <!DOCTYPE html>
 <html>
   <head>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+      <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+  
+      <!-- Font Awesome JS -->
+      <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+      <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <title>Travel Bookings</title>
   </head>
   <body>
-    <h1>Travel Bookings</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>Email</th>
-          <th>Origin</th>
-          <th>Destination</th>
-          <th>Seat #</th>
-          <th>Start Date</th>
-          <th>Departure Time</th>
-          <th>Return Date</th>
-          <th>Return Time</th>
+      <section class="vh-100" style="background-color: #00d0ff;">
+              
+                                  <h1 style="text-align: center">Travel Bookings</h1>
+                                  <table id="viewFlightsTable">
+                                    <thead>
+                                      <tr>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Origin</th>
+                                        <th>Destination</th>
+                                        <th>Seat #</th>
+                                        <th>Start Date</th>
+                                        <th>Departure Time</th>
+                                        <th>Return Date</th>
+                                        <th>Return Time</th>
+                              
+                              
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <% flights.forEach((flight) => { %>
+                                        <tr>
+                                          <td><%= flight.passengername %></td>
+                                          <td><%= flight.phone %></td>
+                                          <td><%= flight.email %></td>
+                                          <td><%= flight.origin %></td>
+                                          <td><%= flight.destination %></td>
+                                          <td><%= flight.seat %></td>
+                                          <td><%= flight.departure %></td>
+                                          <td><%= flight.departureTime %></td>
+                                          <td><%= flight.return %></td>
+                                          <td><%= flight.returnTime %></td>
+                                          <td>
+                                              <a href="/delete/<%= flight._id %>" class="btn btn-danger">Cancel this flight</a>
+                                           </td>
+                              
+                                        </tr>
+                                      <% }); %>
+                                    </tbody>
+                              
+                                  </table>
+                              
+                                  <br><br><br><br><br> 
+                                  <a href="/manageclientflights" class="button">Go Back to Main Menu</a>
+                                  <%- include ('partials/footer') %>
+          
+                         
+                             
+          </section>
+</body>
+  <body>
 
 
+<<<<<<< HEAD
         </tr>
       </thead>
       <tbody>
@@ -49,6 +95,8 @@
 
     <br><br><br><br><br> 
     <a href="/manageclientflights" class="button">Go Back to Main Menu</a>
+=======
+>>>>>>> 2932e48ceca26591cbcc471b1951b68b92fe5e99
 
   </body>
 </html>

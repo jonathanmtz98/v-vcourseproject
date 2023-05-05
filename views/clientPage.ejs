@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
   <title> Book your Flight</title>
 </head>
 <body>
+<<<<<<< HEAD
   <h1>Book your Flight</h1>
   <!-- <ul>
     <% destinations.forEach(destination => { %>
@@ -82,5 +90,100 @@
       <br><br><br>
       <a href="/manageclientflights" class="button">Go back to main menu</a>
 
+=======
+    <section class="vh-100" style="background-color: #00d0ff;">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5"  >
+                        <div class="card shadow-2-strong" style="border-radius: 1rem;" >
+                            <div class="card-body p-5 text-center" >
+                                <h1>Book your Flight</h1>
+                                <!-- <ul>
+                                  <% destinations.forEach(destination => { %>
+                                    <li><%= destination.destination %> </li>
+                                  <% }) %>
+                                </ul> -->
+                              
+                              
+                                    <form method="post" action="/">
+                              
+                                      <label for="name">Name:</label>
+                                      <input type="text" name="name" autocomplete="off" required>
+                                      <br><br>
+                                      <label for="email">Email:</label>
+                                      <input type="email" name="email" autocomplete="off" required>
+                                      <br><br>
+                                      <label for="phone">Phone:</label>
+                                      <input type="tel" name="phone" autocomplete="off" required>
+                                      <br><br>
+                                      <!-- <label for="origin">Origin:</label>
+                                      <input type="text" name="origin" autocomplete="off" required>
+                                       -->
+                                       <label for="origin">Origin:</label>
+                                       <select id="origin" name="origin" autocomplete="off" required>
+                                         <option value="">Select Origin</option>
+                                         <option value="El Paso">El Paso</option>
+                                         <option value="New York">New York</option>
+                                         <option value="Los Angeles">Los Angeles</option>
+                                         <option value="Orlando">Orlando</option>
+                                         <option value="Las Vegas">Las Vegas</option>
+                                         <option value="San Francisco">San Francisco</option>
+                                         <option value="Washington">Washington</option>
+                                         <option value="Boston">Boston</option>
+                                         <option value="Seattle">Seattle</option>
+                                       </select>
+                                       <br> <br>
+                                      <label for="destinations">Select a destination:</label>
+                                      <select name="destinations" id="destinations">
+                                        <% destinations.forEach((destination) => { %>
+                                          <option value="<%= destination.destination %>"><%= destination.destination %></option>
+                                        <% }); %>
+                                      </select>
+                                      <br><br>
+                                      <label for="departure">Departure:</label>
+                                      <input type="date" name="departure" autocomplete="off" required>
+                                      <br><br>
+                              
+                                      <label for="departureTime">Choose a time for your departure:</label>
+                                      <input type="time" id="departureTime" name="departureTime" required>
+                                      <small>You must be in the airport an hour prior to your departure</small>
+                                      <br><br>
+                                      <label for="returnDate">Return Date:</label>
+                                      <input type="date" name="returnDate" autocomplete="off" required>
+                                      <br><br>
+                              
+                                      <label for="returnTime">Choose a time for your return flight:</label>
+                                      <input type="time" id="returnTime" name="returnTime" required>
+                                      <br><br>
+                                      <label for="seatSelection">Seat Selection:</label>
+                                      <select id="seatSelection" name="seatSelection" autocomplete="off" required>
+                                        <option value="">Select a Seat</option>
+                                        <option value="A1">A1</option>
+                                        <option value="A2">A2</option>
+                                        <option value="A3">A3</option>
+                                        <option value="B1">B1</option>
+                                        <option value="B2">B2</option>
+                                        <option value="B3">B3</option>
+                                        <option value="C1">C1</option>
+                                        <option value="C2">C2</option>
+                                        <option value="C3">C3</option>
+                                      </select>
+                                      <br><br>
+                                
+                                      <button type="submit">Submit</button>
+                                    </form>
+                                    <br><br><br>
+                                    <a href="/manageclientflights" class="button">Go back to main menu</a>
+                                
+                                <%- include ('partials/footer') %>
+        
+                       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+>>>>>>> 2932e48ceca26591cbcc471b1951b68b92fe5e99
 </body>
 </html>

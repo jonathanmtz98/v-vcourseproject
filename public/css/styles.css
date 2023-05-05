@@ -1,0 +1,16 @@
+#viewFlightsTable{
+    background-color: white;
+}
+#viewFlightsTable th{
+    width: 200px;
+}
+
+#viewFlightsTable th, #viewFlightsTable tr, #viewFlightsTable td{
+    border: 2px solid;
+}
+
+#destinationsList{
+    width: fit-content;
+    font-size: 20px;
+    margin-right: 30px
+}

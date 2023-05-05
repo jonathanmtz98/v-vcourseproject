@@ -1,10 +1,7 @@
-<h1>ADMIN PAGE</h1>
-
-<!DOCTYPE html>
-<html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Travel Booking Form</title>
+<<<<<<< HEAD
   </head>
   <body>
     <h1>Travel Booking Form</h1>
@@ -18,11 +15,39 @@
       <input type="seatNumber" name="seatNumber" autocomplete="off">
       <button type="submit">Submit</button>
       <br> <br>
+=======
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+>>>>>>> 2932e48ceca26591cbcc471b1951b68b92fe5e99
 
-      <a href="/manageflights" class="btn btn-primary">Go back to main menu</a>
-      <br><br>
-   
-
-    </form>
-  </body>
-</html>
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="vh-100" style="background-color: #00d0ff;">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5"  >
+                        <div class="card shadow-2-strong" style="border-radius: 1rem;" >
+                            <div class="card-body p-5 text-center" >
+                                <h1>ADMIN PAGE</h1>
+                                <h1>Travel Booking Form</h1>
+                                <form method="post" action="/adminhome">
+                                  <label for="destination">Add a New Destination:</label>
+                                  <input type="text" name="destination" autocomplete="off" required>
+                                  <button type="submit">Submit</button>
+                                  <br> <br>
+                            
+                                  <a href="/manageflights" class="btn btn-primary">Go back to main menu</a>
+                                <%- include ('partials/footer') %>
+        
+                       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</body>
