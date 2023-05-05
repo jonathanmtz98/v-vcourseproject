@@ -297,23 +297,6 @@ app.get("/manageflights", async (req,res)=> {
 });
 
 
-
-
-
-
-// app.get('/', async (req, res) => {
-//     try {
-//       // Find all documents in the collection
-//       const myDocuments = await MyModel.find({});
-//       // Render the EJS file and pass the documents as a variable
-//       res.render('index.ejs', { myDocuments });
-//     } catch (err) {
-//       console.log(err);
-//       res.send('Error retrieving documents');
-//     }
-//   });
-
-
 let port = process.env.PORT;
 if (port == null || port == "") {
     port = 3000;
