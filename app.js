@@ -39,6 +39,16 @@ const adminSchema = new mongoose.Schema({
     password: String,
 })
 
+const creditcardSchema = new mongoose.Schema({
+    name: String,
+    billingAddress: String,
+    cardNumber: String,
+    cvv: String,
+    expirationDate: String
+})
+
+const CreditCard = mongoose.model("CreditCard",creditcardSchema)
+
 const Admin = mongoose.model("Admin", adminSchema)
 
 userSchema.plugin(passportLocalMongoose);
@@ -252,7 +262,6 @@ app.post("/adminhome", function(req,res){
     })
     flight.save()
     console.log(flight);
-    console.log(seat);
     //res.send(`Changes has been applied`);
     res.render("success")
 });
