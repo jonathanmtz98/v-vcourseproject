@@ -143,7 +143,7 @@ app.post("/", async (req,res) =>{
     const name_input = req.body.name;
     const email_input = req.body.email;
     const phone_input = req.body.phone;
-    seat_input = "placeholder"
+    //seat_input = "placeholder"
 
     const flight = new Travel ({
         destination: destination_input,
@@ -155,7 +155,7 @@ app.post("/", async (req,res) =>{
         passengername: name_input,
         email: email_input,
         phone: phone_input,
-        seatInput: seat_input
+        // seatInput: seat_input
 
     })
     flight.save()

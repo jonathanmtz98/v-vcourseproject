@@ -35,18 +35,20 @@
                                     <tbody>
                                       <% flights.forEach((flight) => { %>
                                         <tr>
-                                          <td><%= flight.passengername %></td>
-                                          <td><%= flight.phone %></td>
-                                          <td><%= flight.email %></td>
-                                          <td><%= flight.origin %></td>
-                                          <td><%= flight.destination %></td>
-                                          <td><%= flight.seat %></td>
-                                          <td><%= flight.departure %></td>
-                                          <td><%= flight.departureTime %></td>
-                                          <td><%= flight.return %></td>
-                                          <td><%= flight.returnTime %></td>
+                                          <td><%=flight.passengername%></td>
+                                          <td><%=flight.phone%></td>
+                                          <td><%=flight.email%></td>
+                                          <td><%=flight.origin%></td>
+                                          <td><%=flight.destination%></td>
+                                          <td><%=flight.seatInput%></td>
+                                          <td><%=flight.departure%></td>
+                                          <td><%=flight.departureTime%></td>
+                                          <td><%=flight.return%></td>
+                                          <td><%=flight.returnTime%></td>
                                           <td>
-                                              <a href="/delete/<%= flight._id %>" class="btn btn-danger">Cancel this flight</a>
+                                              <a href="/delete/<%=flight._id%>" class="btn btn-danger">Cancel this flight</a>
+                                              <a href="/edit/<%=flight._id%>" class="btn btn-primary">Assign/Modify Seats</a>
+
                                            </td>
                               
                                         </tr>
@@ -66,37 +68,6 @@
   <body>
 
 
-<<<<<<< HEAD
-        </tr>
-      </thead>
-      <tbody>
-        <%flights.forEach((flight)=>{ %>
-          <tr>
-            <td><%=flight.passengername%></td>
-            <td><%=flight.phone%></td>
-            <td><%=flight.email%></td>
-            <td><%=flight.origin%></td>
-            <td><%=flight.destination%></td>
-            <td><%=flight.seatInput%></td>
-            <td><%=flight.departure%></td>
-            <td><%=flight.departureTime%></td>
-            <td><%=flight.return%></td>
-            <td><%=flight.returnTime%></td>
-            <td>
-                <a href="/delete/<%= flight._id%>" class="btn btn-danger">Cancel this flight</a>
-                <a href="/edit/<%=flight._id%>" class="btn btn-primary">Assign/Modify Seats</a>
-             </td>
-
-          </tr>
-        <% }); %>
-      </tbody>
-
-    </table>
-
-    <br><br><br><br><br> 
-    <a href="/manageclientflights" class="button">Go Back to Main Menu</a>
-=======
->>>>>>> 2932e48ceca26591cbcc471b1951b68b92fe5e99
 
   </body>
 </html>
