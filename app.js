@@ -242,7 +242,7 @@ app.get('/delete/:id', async (req, res) => {
 });
   
 
-// ################# ADMIN SECTION ##################
+// ############################################## ADMIN SECTION ##############################################
 const destinationSchema = new mongoose.Schema({
     destination: String
 })
