@@ -6,6 +6,7 @@
   </head>
   <body>
     <h1>Proceed to Pay to Finish your Flight Booking</h1>
+    <p>Your total: <span id="displayPrice"></span></p> <!-- Add this line to display the price -->
     <form action="/process-payment" method="POST">
       <label for="cardNumber">Card Number:</label>
       <input type="text" id="cardNumber" name="cardNumber" required>
@@ -23,7 +24,14 @@
       <input type="text" id="expirationDate" name="expirationDate" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}" required>
       <small>Format: MM/YY</small>
       <br><br>
+      <input type="hidden" id="price" name="price" value="<%= price %>"> <!-- Add this line to include the randomly generated price -->
       <button type="submit">Submit</button>
     </form>
+    <script>
+      // Generate a random price between 10 and 100
+      var price = Math.floor(Math.random() * 301) + 200;
+      document.getElementById('price').value = price; // Set the generated price in the hidden input field
+      document.getElementById('displayPrice').textContent = '$' + price; // Display the price dynamically
+    </script>
   </body>
 </html>

@@ -244,7 +244,8 @@ app.get('/delete/:id', async (req, res) => {
 
 // Payment page retriever
 app.get('/makepayment', async (req,res)=>{
-    res.render('makepayment')
+    const price = Math.floor(Math.random() * 301) + 200;
+    res.render('makepayment', {price})
 })
 
 app.post('/process-payment', (req, res) => {
@@ -283,17 +284,6 @@ app.post('/process-payment', (req, res) => {
   } else {
     res.render('payment-result', { success: true });
   }
-
-    const newCreditCard = new CreditCard({
-        cardNumber: cardNumber,
-        cvv: cvv,
-        name: name,
-        billingAddress: billingAddress,
-        expirationDate: expirationDate
-
-    })
-    newCreditCard.save()
-    
     res.render('payment-result', { success: true });
 });
 
