@@ -199,7 +199,7 @@ app.post('/update/:id', async (req,res)=>{
         await Travel.findByIdAndUpdate(id,{
             seatInput: selectedSeat
         }, {new: true})
-        res.redirect("/viewflights")
+        res.redirect("/makepayment")
     } catch(error){
         console.log(error.message);
         res.status(500).send({message: "Internal server error"})
@@ -244,8 +244,60 @@ app.get('/delete/:id', async (req, res) => {
 
 // Payment page retriever
 app.get('/makepayment', async (req,res)=>{
-
+    res.render('makepayment')
 })
+
+app.post('/process-payment', (req, res) => {
+    const cardNumber = req.body.cardNumber;
+    const cvv = req.body.cvv;
+    const name = req.body.ownerName;
+    const billingAddress = req.body.billingAddress
+    const expirationDate  = req.body.expirationDate;
+
+    if (cardNumber.length !== 16) {
+        // Render an error page indicating that the card number is invalid
+        res.render('payment-result', { success: false, cardNumber: cardNumber, cvv:cvv });
+        return;
+    }
+
+    if (cvv.length !== 3) {
+        // Render an error page indicating that the CVV is invalid
+        res.render('payment-result', { success: false, cardNumber: cardNumber, cvv: cvv });
+        return;
+    }
+   
+
+    // Extract month and year from the expiration date
+  const [month, year] = expirationDate.split('/');
+
+  // Get the current month and year
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1; // January is month 0
+  const currentYear = currentDate.getFullYear() % 100; // Last two digits of the year
+
+  // Validate the expiration date
+  if (!expirationDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/)) {
+    res.send('<p>Invalid expiration date format. Please enter the date in the format MM/YY.</p>');
+  } else if (parseInt(year) < currentYear || (parseInt(year) === currentYear && parseInt(month) < currentMonth)) {
+    res.send('<p>The entered expiration date has already passed. Please enter a valid date.</p>');
+  } else {
+    res.render('payment-result', { success: true });
+  }
+
+    const newCreditCard = new CreditCard({
+        cardNumber: cardNumber,
+        cvv: cvv,
+        name: name,
+        billingAddress: billingAddress,
+        expirationDate: expirationDate
+
+    })
+    newCreditCard.save()
+    
+    res.render('payment-result', { success: true });
+});
+
+
 
 
 
