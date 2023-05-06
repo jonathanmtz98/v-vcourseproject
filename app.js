@@ -114,6 +114,14 @@ app.get('/logout', function(req,res){
     })
 })
 
+app.get('/adminlogout', function(req,res){
+    req.logout(function(err){
+        if (err){
+            return next(err) }
+        res.redirect('/adminlogin')
+    })
+})
+
 const travelSchema = new mongoose.Schema({
     origin: String,
     destination: String,
@@ -356,6 +364,18 @@ app.get("/manageflights", async (req,res)=> {
     }
 });
 
+app.get('/deleteDestination/:id', async (req, res) => {
+    const elementId = req.params.id;
+    try {
+      const deletedElement = await Destination.findByIdAndDelete(elementId);
+      console.log(`Element with ID ${elementId} deleted`);
+      //res.send(`Element with ID ${elementId} deleted`);
+      res.redirect("/manageflights")
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Error deleting element');
+    }
+});
 
 let port = process.env.PORT;
 if (port == null || port == "") {

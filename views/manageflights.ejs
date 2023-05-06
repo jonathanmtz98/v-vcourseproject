@@ -67,12 +67,17 @@
                                     <ul id="destinationsList">
                                         <% destinations.forEach(destination => { %>
                                           <li><%= destination.destination %> </li>
+
+                                          <a href="/deleteDestination/<%=destination._id%>" class="btn btn-danger">Delete Destination</a>
                                         <% }) %>
+
                                     </ul> 
-                                
-                                <a href="/adminhome" class="button">Add a New Destination</a>
+
+                                <a href="/adminhome" class="btn btn-primary">Add a New Destination</a>
+                                <button onclick="location.href='/adminlogout'">Logout</button>
+
+
                                 <br><br>
-                                <a href="/deleteflight" class="button">Delete a Destination</a>
                                 <%- include ('partials/footer') %>
         
                        
@@ -83,3 +88,19 @@
             </div>
         </section>
 </body>
+
+<script>
+    function deleteDestination(destinationId) {
+      // Perform the delete operation using AJAX or other methods
+      // You can make a request to the server to delete the destination based on its ID
+      // After successful deletion, you may choose to reload the page or update the list dynamically
+      // Example:
+      // fetch(`/delete-destination?id=${destinationId}`, { method: 'DELETE' })
+      //   .then(response => {
+      //     // Handle the response or update the destinations list accordingly
+      //   })
+      //   .catch(error => {
+      //     // Handle the error if necessary
+      //   })
+    }
+  </script>
