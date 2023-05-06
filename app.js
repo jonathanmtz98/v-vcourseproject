@@ -114,14 +114,6 @@ app.get('/logout', function(req,res){
     })
 })
 
-app.get('/adminlogout', function(req,res){
-    req.logout(function(err){
-        if (err){
-            return next(err) }
-        res.redirect('/adminlogin')
-    })
-})
-
 const travelSchema = new mongoose.Schema({
     origin: String,
     destination: String,
@@ -208,7 +200,8 @@ app.post('/update/:id', async (req,res)=>{
     // console.log(selectedSeat);
     try{
         await Travel.findByIdAndUpdate(id,{
-            seatInput: selectedSeat
+            seatInput: selectedSeat,
+            status: 'paid'
         }, {new: true})
         res.redirect("/makepayment")
     } catch(error){
@@ -348,6 +341,13 @@ app.post("/adminlogin",function(req, res){
     })
 })
 
+app.get('/adminlogout', function(req,res){
+    req.logout(function(err){
+        if (err){
+            return next(err) }
+        res.redirect('/adminlogin')
+    })
+})
 
 //This function is to show flights in the admin gui so he decides to add or delete more
 app.get("/manageflights", async (req,res)=> {
