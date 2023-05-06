@@ -27,6 +27,7 @@ app.use(passport.session());
 
 const mongoose = require ("mongoose")
 const { application } = require("express")
+const exp = require("constants")
 //mongoose.connect('mongodb://localhost/V&V')
 mongoose.connect('mongodb+srv://software:PassWord1!@cluster0.yjqdrnw.mongodb.net/?retryWrites=true&w=majority')
 const userSchema = new mongoose.Schema({
@@ -255,36 +256,47 @@ app.post('/process-payment', (req, res) => {
     const billingAddress = req.body.billingAddress
     const expirationDate  = req.body.expirationDate;
 
-    if (cardNumber.length !== 16) {
+    // if (cardNumber.length !== 16) {
+    //     // Render an error page indicating that the card number is invalid
+    //     res.render('payment-result', { success: false, cardNumber: cardNumber, cvv:cvv, expirationDate: expirationDate });
+    //     return;
+    // }
+
+    // if (cvv.length !== 3) {
+    //     // Render an error page indicating that the CVV is invalid
+    //     res.render('payment-result', { success: false, cardNumber: cardNumber, cvv: cvv, expirationDate: expirationDate });
+    //     return;
+    // }
+    // let errorMessage = '';
+
+    if (!cardNumber || cardNumber.length !== 16) {
         // Render an error page indicating that the card number is invalid
-        res.render('payment-result', { success: false, cardNumber: cardNumber, cvv:cvv });
+        res.render('payment-result', { success: false, errorMessage: 'Invalid card number length. Please make sure the card number has 16 digits.' });
         return;
-    }
-
-    if (cvv.length !== 3) {
+      } else if (!cvv || cvv.length !== 3) {
         // Render an error page indicating that the CVV is invalid
-        res.render('payment-result', { success: false, cardNumber: cardNumber, cvv: cvv });
+        res.render('payment-result', { success: false, errorMessage: 'Invalid CVV. Please make sure the CVV has 3 digits.' });
         return;
-    }
-   
-
-    // Extract month and year from the expiration date
-  const [month, year] = expirationDate.split('/');
-
-  // Get the current month and year
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth() + 1; // January is month 0
-  const currentYear = currentDate.getFullYear() % 100; // Last two digits of the year
-
-  // Validate the expiration date
-  if (!expirationDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/)) {
-    res.send('<p>Invalid expiration date format. Please enter the date in the format MM/YY.</p>');
-  } else if (parseInt(year) < currentYear || (parseInt(year) === currentYear && parseInt(month) < currentMonth)) {
-    res.send('<p>The entered expiration date has already passed. Please enter a valid date.</p>');
-  } else {
-    res.render('payment-result', { success: true });
-  }
-    res.render('payment-result', { success: true });
+      } else if (!expirationDate || !expirationDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/)) {
+        // Render an error page indicating that the expiration date is invalid
+        res.render('payment-result', { success: false, errorMessage: 'Invalid expiration date format. Please enter the date in the format MM/YY.' });
+        return;
+      } else {
+        const [month, year] = expirationDate.split('/');
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1; // January is month 0
+        const currentYear = currentDate.getFullYear() % 100; // Last two digits of the year
+      
+        if (parseInt(year) < currentYear || (parseInt(year) === currentYear && parseInt(month) < currentMonth)) {
+          // Render an error page indicating that the expiration date has already passed
+          res.render('payment-result', { success: false, errorMessage: 'The entered expiration date has already passed. Please enter a valid date.' });
+          return;
+        }
+      }
+      
+      // If no errors occur, continue with the payment processing
+      res.render('payment-result', { success: true });
+      
 });
 
 

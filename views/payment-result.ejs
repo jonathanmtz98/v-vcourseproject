@@ -1,26 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Payment Result</title>
-    <!-- Add any necessary CSS styles or external libraries here -->
-  </head>
-  <body>
-    <% if (success) { %>
-      <h1>Payment Successful! Enjoy your flight</h1>
-      <a href="/viewflights">Go Back to your flight list</a>
-    <% } else { %>
-      <h1>Payment Failed</h1>
-      <% if (cardNumber && cardNumber.length !== 16) { %>
-        <p>Invalid card number length. Please make sure the card number has 16 digits.</p>
-        <a href="/makepayment">Go Back</a>
-      <% } %>
-      <% if (cvv && cvv.length !== 3) { %>
-        <p>Invalid CVV. Please make sure the CVV has 3 digits.</p>
-        <a href="/makepayment">Go Back</a>
-      <% } %>
-      
-    <% } %>
-
-
-  </body>
+<head>
+  <title>Payment Result</title>
+</head>
+<body>
+  <% if (success) { %>
+    <h1>Payment Successful</h1>
+    <p>Your payment has been processed successfully.</p>
+  <% } else { %>
+    <h1>Payment Failed</h1>
+    <p><%= errorMessage %></p>
+  <% } %>
+</body>
 </html>
