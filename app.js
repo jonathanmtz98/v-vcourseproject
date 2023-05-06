@@ -125,6 +125,7 @@ const travelSchema = new mongoose.Schema({
     phone: String,
     seatInput: String,
     email: String,
+    status: String
 })
 
 
@@ -173,6 +174,7 @@ app.post("/", async (req,res) =>{
         passengername: name_input,
         email: email_input,
         phone: phone_input,
+        status: 'unpaid'
         // seatInput: seat_input
 
     })
@@ -256,19 +258,6 @@ app.post('/process-payment', (req, res) => {
     const billingAddress = req.body.billingAddress
     const expirationDate  = req.body.expirationDate;
 
-    // if (cardNumber.length !== 16) {
-    //     // Render an error page indicating that the card number is invalid
-    //     res.render('payment-result', { success: false, cardNumber: cardNumber, cvv:cvv, expirationDate: expirationDate });
-    //     return;
-    // }
-
-    // if (cvv.length !== 3) {
-    //     // Render an error page indicating that the CVV is invalid
-    //     res.render('payment-result', { success: false, cardNumber: cardNumber, cvv: cvv, expirationDate: expirationDate });
-    //     return;
-    // }
-    // let errorMessage = '';
-
     if (!cardNumber || cardNumber.length !== 16) {
         // Render an error page indicating that the card number is invalid
         res.render('payment-result', { success: false, errorMessage: 'Invalid card number length. Please make sure the card number has 16 digits.' });
@@ -293,7 +282,6 @@ app.post('/process-payment', (req, res) => {
           return;
         }
       }
-      
       // If no errors occur, continue with the payment processing
       res.render('payment-result', { success: true });
       
@@ -312,6 +300,7 @@ const Destination = mongoose.model("Destination", destinationSchema)
 
 //Manage Flights
 app.get("/adminhome", function(req,res){
+
     res.render('adminhome')
 });
 
@@ -358,8 +347,9 @@ app.get("/manageflights", async (req,res)=> {
         try {
       // Find all documents in the collection
       const destinations = await Destination.find({});
+      const flights = await Travel.find({})
       // Render the EJS file and pass the documents as a variable
-      res.render('manageflights.ejs', { destinations });
+      res.render('manageflights.ejs', { destinations, flights });
     } catch (err) {
       console.log(err);
       res.send('Error retrieving documents');

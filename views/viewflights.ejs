@@ -28,6 +28,7 @@
                                         <th>Departure Time</th>
                                         <th>Return Date</th>
                                         <th>Return Time</th>
+                                        <th>Status</th>
                               
                               
                                       </tr>
@@ -45,6 +46,7 @@
                                           <td><%=flight.departureTime%></td>
                                           <td><%=flight.return%></td>
                                           <td><%=flight.returnTime%></td>
+                                          <td><%=flight.status%></td>
                                           <td>
                                               <a href="/delete/<%=flight._id%>" class="btn btn-danger">Cancel this flight</a>
                                               <a href="/edit/<%=flight._id%>" class="btn btn-primary">Assign/Modify Seats</a>

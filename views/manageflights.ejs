@@ -1,33 +1,78 @@
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
-
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-</head>
+<!DOCTYPE html>
+<html>
+  <head>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+      <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+  
+      <!-- Font Awesome JS -->
+      <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+      <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <title>Travel Bookings</title>
+  </head>
 <body>
-    <section class="vh-100" style="background-color: #00d0ff;">
+    <!-- <section class="vh-100" style="background-color: #00d0ff;">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-12 col-md-8 col-lg-6 col-xl-5"  >
                         <div class="card shadow-2-strong" style="border-radius: 1rem;" >
-                            <div class="card-body p-5 text-center" >
+                            <div class="card-body p-5 text-center" > -->
                                 <h1>Manage Flights</h1>
 
-                                <h2> Destinations you've included in the system:</h2>
+                                <h2>Client Flights</h2>
                                 <center>
+                                <table id="viewFlightsTable">
+                                    <thead>
+                                      <tr>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Origin</th>
+                                        <th>Destination</th>
+                                        <th>Seat #</th>
+                                        <th>Start Date</th>
+                                        <th>Departure Time</th>
+                                        <th>Return Date</th>
+                                        <th>Return Time</th>
+                                        <th>Status</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <% flights.forEach((flight) => { %>
+                                        <tr>
+                                          <td><%=flight.passengername%></td>
+                                          <td><%=flight.phone%></td>
+                                          <td><%=flight.email%></td>
+                                          <td><%=flight.origin%></td>
+                                          <td><%=flight.destination%></td>
+                                          <td><%=flight.seatInput%></td>
+                                          <td><%=flight.departure%></td>
+                                          <td><%=flight.departureTime%></td>
+                                          <td><%=flight.return%></td>
+                                          <td><%=flight.returnTime%></td>
+                                          <td><%=flight.status%></td>
+                                          <td>
+                                              <a href="/delete/<%=flight._id%>" class="btn btn-danger">Cancel this flight</a>
+
+                                           </td>
+                              
+                                        </tr>
+                                      <% }); %>
+                                    </tbody>
+                              
+                                  </table>
+                                </center>
+                                <h2> Destinations you've included in the system:</h2>
                                     <ul id="destinationsList">
                                         <% destinations.forEach(destination => { %>
                                           <li><%= destination.destination %> </li>
                                         <% }) %>
                                     </ul> 
-                                </center>
                                 
-                                <a href="/adminhome" class="button">Add a New Flight</a>
+                                <a href="/adminhome" class="button">Add a New Destination</a>
                                 <br><br>
-                                <a href="/deleteflight" class="button">Delete a Flight</a>
+                                <a href="/deleteflight" class="button">Delete a Destination</a>
                                 <%- include ('partials/footer') %>
         
                        
