@@ -187,29 +187,58 @@ app.post("/", async (req,res) =>{
 })
 
 
+// app.get('/edit/:id', async (req, res) => {
+//     const flights = await Travel.findById(req.params.id);
+//     res.render('select-seats', { flights: flights });
+// });
+
+
 app.get('/edit/:id', async (req, res) => {
     const flights = await Travel.findById(req.params.id);
-    res.render('select-seats', { flights: flights });
+    const selectedSeats = await Travel.distinct('seatInput', { seatInput: { $exists: true } });
+    res.render('select-seats', { flights, selectedSeats });
 });
-
+// app.post('/update/:id', async (req, res) => {
+//     const id = req.params.id;
+//     const selectedSeat = req.body.seat;
+  
+//     try {
+//       await Travel.findByIdAndUpdate(id, {
+//         seatInput: selectedSeat,
+//         status: "paid" // Adding the status update to "paid"
+//       }, { new: true });
+  
+//       res.redirect("/makepayment");
+//     } catch (error) {
+//       console.log(error.message);
+//       res.status(500).send({ message: "Internal server error" });
+//     }
+//   });
+  
 app.post('/update/:id', async (req, res) => {
     const id = req.params.id;
     const selectedSeat = req.body.seat;
   
     try {
-      await Travel.findByIdAndUpdate(id, {
-        seatInput: selectedSeat,
-        status: "paid" // Adding the status update to "paid"
-      }, { new: true });
+      const travel = await Travel.findById(id);
+      const selectedSeats = await Travel.distinct('seatInput', { seatInput: { $exists: true } });
   
-      res.redirect("/makepayment");
+      if (selectedSeats.includes(selectedSeat)) {
+        return res.status(400).send({ message: 'Seat already selected' });
+      }
+  
+      travel.seatInput = selectedSeat;
+      travel.status = 'paid';
+      await travel.save();
+  
+      res.redirect('/makepayment');
     } catch (error) {
       console.log(error.message);
-      res.status(500).send({ message: "Internal server error" });
+      res.status(500).send({ message: 'Internal server error' });
     }
   });
   
-
+  
   
 
 

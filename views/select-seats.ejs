@@ -1,4 +1,4 @@
- <h2>Seats</h2>
+ <!-- <h2>Seats</h2>
 <form method="post" action="/update/<%=flights.id%>">
   <select name="seat" id="seat">
     <option value="A1" id="A1">A1</option>
@@ -7,6 +7,20 @@
     <option value="B1">B1</option>
     <option value="B2">B2</option>
     <option value="B3">B3</option>
+  </select>
+
+  <input type="submit" name="submit" value="Save Changes">
+</form> -->
+
+<h2>Seats</h2>
+<form method="post" action="/update/<%=flights.id%>">
+  <select name="seat" id="seat">
+    <option value="A1" <% if (selectedSeats.includes('A1')) { %>disabled<% } %>>A1</option>
+    <option value="A2" <% if (selectedSeats.includes('A2')) { %>disabled<% } %>>A2</option>
+    <option value="A3" <% if (selectedSeats.includes('A3')) { %>disabled<% } %>>A3</option>
+    <option value="B1" <% if (selectedSeats.includes('B1')) { %>disabled<% } %>>B1</option>
+    <option value="B2" <% if (selectedSeats.includes('B2')) { %>disabled<% } %>>B2</option>
+    <option value="B3" <% if (selectedSeats.includes('B3')) { %>disabled<% } %>>B3</option>
   </select>
 
   <input type="submit" name="submit" value="Save Changes">
