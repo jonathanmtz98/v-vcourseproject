@@ -6,6 +6,7 @@ const passport = require('passport')
 const passportLocalMongoose = require('passport-local-mongoose')
 const crypto = require('crypto')
 const methodOverride = require ('method-override')
+const moment = require('moment');
 
 const app = express()
 
@@ -187,10 +188,7 @@ app.post("/", async (req,res) =>{
 })
 
 
-// app.get('/edit/:id', async (req, res) => {
-//     const flights = await Travel.findById(req.params.id);
-//     res.render('select-seats', { flights: flights });
-// });
+
 
 
 app.get('/edit/:id', async (req, res) => {
@@ -198,22 +196,7 @@ app.get('/edit/:id', async (req, res) => {
     const selectedSeats = await Travel.distinct('seatInput', { seatInput: { $exists: true } });
     res.render('select-seats', { flights, selectedSeats });
 });
-// app.post('/update/:id', async (req, res) => {
-//     const id = req.params.id;
-//     const selectedSeat = req.body.seat;
-  
-//     try {
-//       await Travel.findByIdAndUpdate(id, {
-//         seatInput: selectedSeat,
-//         status: "paid" // Adding the status update to "paid"
-//       }, { new: true });
-  
-//       res.redirect("/makepayment");
-//     } catch (error) {
-//       console.log(error.message);
-//       res.status(500).send({ message: "Internal server error" });
-//     }
-//   });
+
   
 app.post('/update/:id', async (req, res) => {
     const id = req.params.id;
