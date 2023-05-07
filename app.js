@@ -192,24 +192,25 @@ app.get('/edit/:id', async (req, res) => {
     res.render('select-seats', { flights: flights });
 });
 
-app.post('/update/:id', async (req,res)=>{
-     let id = req.params.id
-     selectedSeat = req.body.seat
-     console.log(selectedSeat);
-     console.log(id);
-    // console.log(selectedSeat);
-    try{
-        await Travel.findByIdAndUpdate(id,{
-            seatInput: selectedSeat,
-            status: 'paid'
-        }, {new: true})
-        res.redirect("/makepayment")
-    } catch(error){
-        console.log(error.message);
-        res.status(500).send({message: "Internal server error"})
+app.post('/update/:id', async (req, res) => {
+    const id = req.params.id;
+    const selectedSeat = req.body.seat;
+  
+    try {
+      await Travel.findByIdAndUpdate(id, {
+        seatInput: selectedSeat,
+        status: "paid" // Adding the status update to "paid"
+      }, { new: true });
+  
+      res.redirect("/makepayment");
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).send({ message: "Internal server error" });
     }
-})
+  });
+  
 
+  
 
 
 //This function retrieves main GUI for clients, where they can decide to book a flight or view flights

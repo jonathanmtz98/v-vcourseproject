@@ -1,22 +1,13 @@
-<h2>Seats</h2>
-
-<!-- <select name="option" onchange="disableOption(this)"> -->
-<form method="post" action="/update/<%=flights.id%> ">
-  <select name="seat" value="seat">
+ <h2>Seats</h2>
+<form method="post" action="/update/<%=flights.id%>">
+  <select name="seat" id="seat">
     <option value="A1" id="A1">A1</option>
     <option value="A2" id="A2">A2</option>
     <option value="A3">A3</option>
     <option value="B1">B1</option>
     <option value="B2">B2</option>
     <option value="B3">B3</option>
-</select>
+  </select>
 
-<input type="submit" name="submit" value="Save Changes" onClick="">
+  <input type="submit" name="submit" value="Save Changes">
 </form>
-
-<!-- <script>
-  function disableOption(select){
-    const selectedOption = select.options[select.selectedIndex];
-    selectedOption.disabled = true
-  }
-</script> -->
